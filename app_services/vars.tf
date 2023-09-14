@@ -32,7 +32,9 @@ variable "app_service" {
     python_version           = optional(string, "3.11")
 
     auto_heal_enabled                 = optional(bool, false)
-    action_type                       = optional(string, "Recycle")
+    action_type                       = optional(string, "Recycle") # LogEvent, CustomAction for windows
+    executable                        = optional(string, "log.exe") # for Windows type
+    parameters                        = optional(string) # for Windows type
     minimum_process_execution_time    = optional(string) # hh:mm:ss
     count                             = optional(number, 1)
     interval                          = optional(string, "00:30:00") # hh:mm:ss
@@ -81,7 +83,7 @@ variable "app_service" {
     client_affinity_enabled            = optional(bool, false)
     client_certificate_enabled         = optional(bool, false)
     client_certificate_mode            = optional(string, "Optional") # Required, Optional, OptionalInteractiveUser
-    client_certificate_exclusion_paths = optional(string) # ; seperated
+    client_certificate_exclusion_paths = optional(string)             # ; seperated
   }))
 }
 
