@@ -6,6 +6,7 @@ app_service = {
     service_plan_name         = "arpit-app-service01"
     resource_group_name       = "ArpitRG"
     location                  = "east asia"
+    connection_strings = {}
   }
 }
 

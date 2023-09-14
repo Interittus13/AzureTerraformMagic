@@ -5,7 +5,10 @@ resource "azurerm_linux_web_app" "Terraform_Assignment" {
   resource_group_name = each.value.resource_group_name
   service_plan_id     = each.value.use_existing_service_plan ? data.azurerm_service_plan.Terraform_Assignment[each.key].id : azurerm_service_plan.Terraform_Assignment[each.key].id
   site_config {
-    always_on = each.value.always_on
+    always_on             = each.value.always_on
+    api_definition_url    = each.value.api_definition_url
+    api_management_api_id = each.value.api_management_api_id
+    app_command_line      = each.value.app_command_line
     application_stack {
       docker_image_name        = each.value.stack_type == "docker" ? each.value.docker_image_name : null
       docker_registry_url      = each.value.stack_type == "docker" ? each.value.docker_registry_url : null
@@ -58,10 +61,32 @@ resource "azurerm_linux_web_app" "Terraform_Assignment" {
     websockets_enabled                = each.value.websockets_enabled
     worker_count                      = each.value.worker_count
 
+    cors {
+      allowed_origins     = each.value.allowed_origins
+      support_credentials = each.value.support_credentials
+    }
+
+    # dynamic "ip_restriction" {
+    #   for_each = each.value.ip_restrictions
+
+    #   content {
+    #     action = "value"
+    #     headers = [{
+    #       x_azure_fdid      = ["value"]
+    #       x_fd_health_probe = ["value"]
+    #       x_forwarded_for   = ["value"]
+    #       x_forwarded_host  = ["value"]
+    #     }]
+    #     ip_address                = "value"
+    #     name                      = "value"
+    #     priority                  = 0
+    #     service_tag               = "value"
+    #     virtual_network_subnet_id = "value"
+    #   }
+    # }
+
     # container_registry_managed_identity_client_id = "value"
     # container_registry_use_managed_identity = false
-    # cors {
-    # }
     # default_documents = [ "value" ]
 
     # scm_ip_restriction {
@@ -72,5 +97,75 @@ resource "azurerm_linux_web_app" "Terraform_Assignment" {
   enabled                       = each.value.enabled
   https_only                    = each.value.https_only
   public_network_access_enabled = each.value.public_network_access_enabled
-  tags                          = each.value.tags
+
+  client_affinity_enabled            = each.value.client_affinity_enabled
+  client_certificate_enabled         = each.value.client_certificate_enabled
+  client_certificate_mode            = each.value.client_certificate_mode
+  client_certificate_exclusion_paths = each.value.client_certificate_exclusion_paths
+
+  dynamic "connection_string" {
+    for_each = each.value.connection_strings
+
+    content {
+      name  = connection_string.value.conn_name
+      type  = connection_string.value.conn_type
+      value = connection_string.value.conn_value
+    }
+  }
+
+  identity {
+    type         = each.value.identity_type
+    identity_ids = each.value.identity_ids
+  }
+
+  /* Optional attritubes have some required sub-attributes when expanded */
+
+  # backup {
+  #   enabled = each.value.backup_enabled
+  #   name    = "${each.value.app_name}-backup"
+  #   schedule {
+  #     frequency_interval       = each.value.backup_interval
+  #     frequency_unit           = each.value.backup_unit
+  #     keep_at_least_one_backup = each.value.keep_at_least_one_backup
+  #     retention_period_days    = each.value.backup_retention_period
+  #     start_time               = each.value.backup_start_time
+  #   }
+  #   storage_account_url = each.value.storage_account_url
+  # }
+
+  # logs {
+  #   application_logs {
+  #     azure_blob_storage {
+  #       level             = each.value.logs_level
+  #       retention_in_days = each.value.logs_retention_days
+  #       sas_url           = each.value.sas_url
+  #     }
+  #     file_system_level = each.value.file_system_level
+  #   }
+  #   detailed_error_messages = each.value.detailed_error_messages
+  #   failed_request_tracing  = each.value.failed_request_tracing
+  #   http_logs {
+  #     azure_blob_storage {
+  #       retention_in_days = each.value.logs_retention_days
+  #       sas_url           = each.value.sas_url
+  #     }
+
+  #     file_system {
+  #       retention_in_days = each.value.logs_retention_days
+  #       retention_in_mb   = each.value.logs_file_size
+  #     }
+  #   }
+  # }
+
+  # WILL EXPAND LATER ~~~ TODO
+  # app_settings = {}
+  # auth_settings {}
+  # auth_settings_v2 {}
+  # key_vault_reference_identity_id = "value"
+  # storage_account {
+  #   // Dynamic
+  # }
+  # sticky_settings {}
+
+  tags = each.value.tags
 }

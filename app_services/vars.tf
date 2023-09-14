@@ -15,6 +15,9 @@ variable "app_service" {
 
     app_name                      = string
     always_on                     = optional(bool, false) # False if using Free, F1, D1 or Shared sku
+    api_definition_url            = optional(string)
+    api_management_api_id         = optional(string)
+    app_command_line              = optional(string)
     enabled                       = optional(bool, true)
     https_only                    = optional(bool, false)
     public_network_access_enabled = optional(bool, true)
@@ -52,6 +55,33 @@ variable "app_service" {
     vnet_route_all_enabled            = optional(bool, false)
     websockets_enabled                = optional(bool, false)
     worker_count                      = optional(number, 1)
+    allowed_origins                   = optional(list(string))
+    support_credentials               = optional(bool, false)
+    backup_enabled                    = optional(bool, false)
+    backup_interval                   = optional(number, 7)
+    backup_unit                       = optional(string, "Day")
+    keep_at_least_one_backup          = optional(bool, false)
+    backup_retention_period           = optional(number, 30)
+    backup_start_time                 = optional(string)
+    storage_account_url               = optional(string)
+    logs_level                        = optional(string, "Error") # Error, Warning, Information, Verbose, Off
+    logs_retention_days               = optional(number, 10)
+    sas_url                           = optional(string)
+    file_system_level                 = optional(string, "Error") # Verbose, Information, Warning, Error
+    detailed_error_messages           = optional(bool, false)
+    failed_request_tracing            = optional(bool, false)
+    logs_file_size                    = optional(string)
+    connection_strings = map(object({
+      conn_name  = optional(string)
+      conn_type  = optional(string) # MySQL, SQLServer, SQLAzure, Custom, NotificationHub, ServiceBus, EventHub, APIHub, DocDb, RedisCache, PostgreSQL
+      conn_value = optional(string)
+    }))
+    identity_type                      = optional(string, "SystemAssigned") # SystemAssigned, UserAssigned
+    identity_ids                       = optional(list(string))
+    client_affinity_enabled            = optional(bool, false)
+    client_certificate_enabled         = optional(bool, false)
+    client_certificate_mode            = optional(string, "Optional") # Required, Optional, OptionalInteractiveUser
+    client_certificate_exclusion_paths = optional(string) # ; seperated
   }))
 }
 
