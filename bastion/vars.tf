@@ -2,6 +2,7 @@ variable "azure_bastion" {
   type = map(object({
     virtual_network_name   = string
     address_prefixes       = list(string)
+    use_existing_pip       = optional(bool, false)
     pip_name               = string
     pip_allocation_method  = optional(string, "Static")
     pip_sku                = optional(string, "Standard")
