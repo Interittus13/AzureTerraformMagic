@@ -1,4 +1,10 @@
-virtual_network = {
+rg_module = {
+    rg1 = {
+        name = "ArpitRG"
+    }
+}
+
+vnet_module = {
   vnet1 = {
     name                = "Arpit_vnet01"
     resource_group_name = "ArpitRG"
@@ -14,26 +20,10 @@ virtual_network = {
         address_prefix = "10.0.2.0/24"
       }
     }
-  },
-  # vnet2 = {
-  #   name                = "Arpit_vnet02"
-  #   resource_group_name = "ArpitRG"
-  #   address_space       = ["10.1.0.0/16"]
-
-  #   subnets = {
-  #     subnet1 = {
-  #       subnet_name    = "vnet02_subnet01"
-  #       address_prefix = "10.1.1.0/24"
-  #     },
-  #     subnet2 = {
-  #       subnet_name    = "vnet02_subnet02"
-  #       address_prefix = "10.1.2.0/24"
-  #     }
-  #   }
-  # }
+  }
 }
 
-virtual_network_peering = {
+peering_module = {
   peering1 = {
     enable_peering = false
     peering_name = "Arpit_vnet01-to-Arpit_vnet02"

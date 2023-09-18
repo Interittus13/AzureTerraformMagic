@@ -14,13 +14,3 @@ variable "virtual_network" {
       }))
     }))
 }
-
-variable "virtual_network_peering" {
-  type = map(object({
-    enable_peering = bool
-    resource_group_name = string
-    peering_name = string
-    virtual_network_name = string
-    remote_virtual_network_name = string
-  }))
-}
