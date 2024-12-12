@@ -10,7 +10,7 @@ terraform {
 }
 
 provider "azurerm" {
-  subscription_id = var.account_info.subscription_id
+  subscription_id = module.locals.account_info.subscription_id
 
   features {
     

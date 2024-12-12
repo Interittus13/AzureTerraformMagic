@@ -1,10 +1,5 @@
 # Staging
 
-# account-info variables
-account_info = {
-  subscription_id : "db349500-42dc-484d-8f42-28157bc01930"
-}
-
 tags = {
   bizimpact : "high",
   dept : "IT",

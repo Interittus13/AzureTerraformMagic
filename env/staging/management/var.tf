@@ -1,10 +1,3 @@
-# account-info variables
-variable "account_info" {
-  type = object({
-    subscription_id = string
-  })
-}
-
 variable "tags" {
   type = map(string)
 }
