@@ -30,17 +30,33 @@ rg = {
 }
 
 # Log Analytics Workspaces
-# log_ws = {
-#   wk-bfx-shared-cu-003 = {
-#     rg_name                         = "rg-bfx-shared-cu-003"
-#     location                        = "CentralUS"
-#     log_analytics_ws_name           = "wk-bfx-shared-cu-003"
-#     sku                             = "PerGB2018"
-#     retention_in_days               = 30
-#     allow_resource_only_permissions = false
-#     daily_quota_gb                  = 1
-#   }
-# }
+log_ws = {
+  wk-bfx-shared-cu-003 = {
+    rg_name                         = "rg-staging-cu-001"
+    location                        = "CentralUS"
+    log_analytics_ws_name           = "ws-staging-cu-001"
+    sku                             = "PerGB2018"
+    retention_in_days               = 30
+    allow_resource_only_permissions = false
+    daily_quota_gb                  = 1
+  }
+}
+
+appins = {
+  appins-api-cu-001 = {
+    rg_name          = "rg-staging-cu-001"
+    appin_name       = "appins-staging-api-cu-001"
+    application_type = "web"
+    workspace_name   = "ws-staging-cu-001"
+  }
+  appins-azfn-api-cu-001 = {
+    rg_name          = "rg-staging-cu-001"
+    appin_name       = "appins-staging-azfn-api-cu-001"
+    application_type = "web"
+    workspace_name   = "ws-staging-cu-001"
+  }
+}
+
 
 # # user-assigned identity
 # uai = {

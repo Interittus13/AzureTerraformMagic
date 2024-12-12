@@ -5,10 +5,6 @@ variable "account_info" {
   })
 }
 
-# variable "currentDate" {
-#   type = string
-# }
-
 variable "tags" {
   type = map(string)
 }
@@ -23,25 +19,27 @@ variable "rg" {
 }
 
 # Log Analytics Workspace
-# variable "log_ws" {
-#   type = map(object({
-#     rg_name               = string
-#     location              = string
-#     log_analytics_ws_name = string
-#     daily_quota_gb        = number
-#     retention_in_days     = number
-#     sku                   = string
-#     tags = optional(map(string), {
-#       "bizimpact" : "medium",
-#       "date" : "03/02/2023",
-#       "dept" : "IT",
-#       "email" : "noreply@bomerangfx.com",
-#       "env" : "prod",
-#       "location" : "CentralUS",
-#       "owner" : "BoomerangFX"
-#     })
-#   }))
-# }
+variable "log_ws" {
+  type = map(object({
+    rg_name               = string
+    location              = string
+    log_analytics_ws_name = string
+    daily_quota_gb        = number
+    retention_in_days     = number
+    sku                   = string
+  }))
+}
+
+# Application Insights
+variable "appins" {
+  type = map(object({
+    rg_name          = string
+    location         = optional(string, "CentralUS")
+    appin_name       = string
+    application_type = string
+    workspace_name   = string
+  }))
+}
 
 # # user-assigned identity
 # variable "uai" {
