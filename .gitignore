@@ -22,9 +22,8 @@
 *modules/busniess_analytics
 *modules/database
 *modules/integration
-*modules/networking
 *modules/security
 *modules/storage
 *modules/compute
-*modules/management/*.tf*
+*modules/networking/*.tf*
 *.yml

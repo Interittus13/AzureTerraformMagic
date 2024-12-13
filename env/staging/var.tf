@@ -7,7 +7,6 @@ variable "rg" {
   type = map(object({
     rg_name  = string
     location = string
-    tags     = optional(map(string))
   }))
 }
 
@@ -31,6 +30,16 @@ variable "appins" {
     appin_name       = string
     application_type = string
     workspace_name   = string
+  }))
+}
+
+# Virtual Networks
+variable "vnet" {
+  type = map(object({
+    vnet_name     = string
+    rg_name       = string
+    location      = optional(string, "CentralUS")
+    address_space = list(string)
   }))
 }
 

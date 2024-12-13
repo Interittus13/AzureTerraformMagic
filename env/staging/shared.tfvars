@@ -1,10 +1,10 @@
 # Staging
 
+/* Tags
+  Override Default Tags or Add additional Tags
+*/
 tags = {
   bizimpact : "high",
-  dept : "IT",
-  email : "arpit@gmail.com",
-  env : "nonprod",
   location : "CentralUS",
 }
 
@@ -37,6 +37,7 @@ log_ws = {
   }
 }
 
+# Application Insights
 appins = {
   appins-api-cu-001 = {
     rg_name          = "rg-staging-cu-001"
@@ -49,6 +50,16 @@ appins = {
     appin_name       = "appins-staging-azfn-api-cu-001"
     application_type = "web"
     workspace_name   = "ws-staging-cu-001"
+  }
+}
+
+# Virtual Networks
+vnet = {
+  vnet01 = {
+    vnet_name     = "vnet-staging-cu-001",
+    rg_name       = "rg-stag-networking-cu-001"
+    location      = "CentralUS"
+    address_space = ["10.105.0.0/16"]
   }
 }
 
@@ -65,11 +76,4 @@ appins = {
 #     location = "CentralUS"
 #     uai_name = "mg-bfx-shared-nonprod-001"
 #   }
-
-#   # TESTING
-#   # mg-bfx-shared-nonprod-099-test = {
-#   #   rg_name  = "rg-bfx-test-cu-099"
-#   #   location = "CentralUS"
-#   #   uai_name = "mg-shared-nonprod-099"
-#   # }
 # }
