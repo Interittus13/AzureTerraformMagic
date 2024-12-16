@@ -1,5 +1,6 @@
 variable "tags" {
   type = map(string)
+  default = {}
 }
 
 # Resource Group
@@ -43,11 +44,31 @@ variable "vnet" {
   }))
 }
 
-# # user-assigned identity
-# variable "uai" {
-#   type = map(object({
-#     rg_name  = string
-#     location = string
-#     uai_name = string
-#   }))
-# }
+# Subnets
+variable "subnet" {
+  type = map(object({
+    vnet_name             = string
+    snet_name             = string
+    rg_name               = string
+    location              = optional(string, "CentralUS")
+    address_prefixes      = list(string)
+    private_link_endpoint = optional(string)
+    service_endpoints     = optional(list(string), [])
+  }))
+}
+
+/* modules/containers */
+
+# Container Registry
+variable "acr" {
+  type = map(object({
+    rg_name                       = string
+    location                      = optional(string, "CentralUS")
+    acr_name                      = string
+    sku                           = optional(string, "Basic")
+    admin_enabled                 = optional(bool, false)
+    public_network_access_enabled = optional(bool, true)
+    zone_redundancy_enabled       = optional(bool, false)
+    sec_location                  = string
+  }))
+}

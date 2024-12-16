@@ -32,3 +32,10 @@ module "virtual_network" {
 
   depends_on = [ module.resource_group ]
 }
+
+module "subnet" {
+  source = "../../modules/networking/subnet"
+  subnet = var.subnet
+
+  depends_on = [ module.virtual_network ]
+}
