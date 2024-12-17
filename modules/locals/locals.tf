@@ -1,6 +1,6 @@
 locals {
   account_info = {
-    subscription_id = "db000000-0000-0000-0000-00000bc00000"
+    subscription_id = "db349500-42dc-484d-8f42-28157bc01930"
   }
 
   defaultTags = {
