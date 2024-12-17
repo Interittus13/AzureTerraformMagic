@@ -1,7 +1,3 @@
-# variable "tags" {
-#   type = map(string)
-# }
-
 # Subnets & Network Security Groups
 variable "subnet" {
   type = map(object({

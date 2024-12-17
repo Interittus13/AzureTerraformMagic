@@ -19,11 +19,13 @@
 *modules/prod
 *modules/shared
 *modules/uat
-*modules/busniess_analytics
+*modules/analytics/fab*
+*modules/compute
 *modules/database
 *modules/integration
 *modules/security
 *modules/storage
-*modules/compute
+*modules/networking/applicat*
 *modules/networking/*.tf*
+*modules/web
 *.yml
